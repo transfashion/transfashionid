@@ -1,36 +1,126 @@
 <?php 
+	define('__TEMPLATE_NAME__', 'transfashionid');
+
 	use AgungDhewe\Webservice\WebTemplate;
 	$tpl = WebTemplate::getTemplateObject($this);
 ?><!DOCTYPE html>
 <html>
 	<head>
 		<title><?=$tpl->getTitle()?></title>
-		<link rel="icon" href="/favicon.ico">
-		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/style.css')?>">
+		<base href="<?=$tpl->getBaseHref()?>">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<link rel="icon" href="favicon.ico">
+		<link rel="manifest" href="manifest.json">
+		
+		<style>
+			:root {
+				--promoter-h-desktop: 23px;
+				--promoter-h-mobile: 23px;
+
+				--header-h-desktop: 80px;
+				--header-h-mobile: 50px;
+
+				--logo-w-desktop: 135px;
+				--logo-h-desktop: 40px;
+
+				--logo-w-mobile: 30px;
+				--logo-h-mobile: 30px;
+			}
+		</style>
+		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl(__TEMPLATE_NAME__.'.css')?>">
+		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-promoter.css')?>">
+		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-style.css')?>">
+		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-searchbox.css')?>">
+		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-dropdownmenu.css')?>">
+
+
 		<?=$tpl->getBlockContent('header-metadata')?> 
 		<?=$tpl->getBlockContent('header-style')?> 
 		<script>
-			var $ui = {};
+			var $uilayout = {};
 		</script>
 		<?=$tpl->getBlockContent('header-script')?> 
 	</head>
 
 	<body>
-		<div class="logo">
-			<a href="<?=$tpl->getUrl('')?>"> 
-			<img src="<?=$tpl->getTemplateAssetUrl('assets/logo.png')?>" alt="">
-			</a>
-		</div>
-		<header>
-			<h1>MyWeb Template</h1>
-		</header>
-		<nav></nav>
-		<main>
+		<main id="main">
 			<?=$tpl->getMainContent()?> 
 		</main>
+
 		<footer>
 			<p>Copyright &copy; <?=date('Y')?>. All rights reserved.</p>
 		</footer>
+
+		<header id="head">
+			<div class="dw-promoter hidden" style="grid-area: promoter">
+				<span style="grid-area: running-text">
+				</span>
+				<button style="grid-area: button"></button>
+			</div>
+
+
+			<div class="head-mainrow head-left" style="grid-area: head-left" data-display="mobile">
+				<button id="btn_page_sidebar_show" class="dw-iconbutton" data-icon="menu"></button>
+			</div>
+			<div class="head-mainrow head-left" style="grid-area: head-left" data-display="desktop">
+				<div class="dw-searchbox" style="width: 200px">
+					<input type="text" placeholder="Search for product">
+					<button></button>
+				</div>
+			</div>
+			
+			<a class="head-mainrow head-middle logo" style="grid-area: head-middle" href="/">
+				<!-- LOGO -->
+			</a>
+			
+			
+			<div class="head-mainrow head-right" style="grid-area: head-right;" data-display="mobile">
+				<button class="dw-iconbutton" data-icon="account"></button>
+				<button class="dw-iconbutton" data-icon="chart"></button>
+				<button class="dw-iconbutton" data-icon="search"></button>
+			</div>
+			<div class="head-mainrow head-right" style="grid-area: head-right;" data-display="desktop">
+				<button class="dw-iconbutton" data-icon="account">Login / Register</button>
+				<button class="dw-iconbutton" data-icon="chart">Cart</button>
+			</div>
+
+			<nav id="mainmenu-desktop" style="grid-area: menubar" data-display="desktop">
+				<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'nav-desktop.phtml']) ?>
+			</nav>
+			
+			<div id="searchbar" class="head-searchbar hidden" style="grid-area: searchbar">
+				searchbar
+			</div>
+			<div id="searchresult" class="head-searchresult hidden" style="grid-area: searchresult">
+				search result
+			</div>
+		</header>	
+
+		<nav id="sidebar" class="sidebar-hidden" data-display="mobile">
+			<div class="sidebar-header">
+				<div class="sidebar-header" style="grid-area: head-left;"></div>
+				<div class="sidebar-header logo" style="grid-area: head-middle;"></div>
+				<div class="sidebar-header" style="grid-area: head-right; display: flex; justify-content: flex-end; margin-right: 10px; margin-top: 5px;">
+					<button  id="btn_page_sidebar_hide" class="dw-iconbutton" data-icon="close"></button>
+				</div>
+			</div>
+			<div class="sidebar-nav">
+				<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'nav-mobile.phtml'])?>
+			</div>
+		</nav>
+
+
+
 	</body>	
-	<?=$tpl->getBlockContent('footer-script')?> 
+	<?=$tpl->getBlockContent('footer-script')?>
+	<script>
+		window.addEventListener("load", async (event) => {
+			await window.$uilayout.Init()
+		})
+	</script>
+	<script type="module">
+		import * as uilayout from './template/<?=__TEMPLATE_NAME__?>.mjs'
+		window.$uilayout = uilayout
+	</script>
 </body>

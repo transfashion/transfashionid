@@ -1,0 +1,52 @@
+.dw-searchbox {
+	display: grid;
+	grid-template-columns: auto 23px;
+	grid-template-rows: auto;
+	grid-template-areas: "input button";
+	grid-column-gap: 5px;
+	border-bottom: 1px solid rgb(133, 133, 133);
+	margin-bottom: 1px;
+}
+
+.dw-searchbox:focus-within {
+	border-bottom: 2px solid rgb(34,34,34);
+	margin-bottom: 0px;
+}
+
+.dw-searchbox:has(input[type="text"]:not(:placeholder-shown)) {
+	border-bottom: 2px solid rgb(34,34,34);
+	margin-bottom: 0px;
+}
+
+
+
+.dw-searchbox input[type="text"] {
+	grid-area: input;
+	border: none;
+	outline: none;
+	padding: 2px;
+}
+
+.dw-searchbox button {
+	grid-area: button;
+	border: none;
+	background: none;
+	padding: 0;
+	cursor: pointer;
+	background-image: url('dw-icons/icon-search.svg');
+    background-size: 18px 18px;
+	background-position: center;
+	background-repeat: no-repeat;
+	width: 22px;	
+	height: 22px;
+	outline: none;
+	filter: opacity(0.5);
+}
+
+.dw-searchbox:has(input[type="text"]:not(:placeholder-shown)) button {
+	background-image: url('dw-icons/icon-silang.svg');
+	background-size: 12px 12px;
+
+}
+
+

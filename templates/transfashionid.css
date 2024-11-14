@@ -1,0 +1,234 @@
+@import url("assets/fonts/futura.css");
+
+* {
+	font-family: 'futura-regular', sans-serif;
+	/* font-family:  sans-serif; */
+}
+
+
+html {
+	scrollbar-gutter: stable;
+	scroll-behavior: smooth;
+	font-size: 16px;
+	line-height: 1.6;
+	font-weight: 400;
+	font-style: normal;
+}
+
+body {
+	display: grid;
+	grid-gap: 0;
+	grid-template-columns: auto 1fr;
+	grid-template-rows: auto auto 1fr auto;
+	grid-template-areas: 
+		"sidebar promoter"
+		"sidebar header"
+		"sidebar main"
+		"sidebar footer"
+	;
+	
+
+	margin: 0;
+	padding: 0;
+	
+	min-height: 100vh;
+	
+
+
+	background-color: white;
+	color: black;
+	
+	overflow-y: scroll;
+	/* overflow-x:; */
+}
+
+
+header {
+	grid-area: header;
+
+	display: grid;
+	grid-gap: 0;
+	grid-template-columns: 1fr auto 1fr;
+	grid-template-rows: auto;
+	grid-template-areas: 
+		"promoter promoter promoter"
+		"head-left head-middle head-right"
+		"menubar menubar menubar"
+		"searchbar searchbar searchbar"
+		"searchresult searchresult searchresult"
+	;
+
+	background-color: white;
+	color: black;
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+
+	min-width: 350px;
+	
+}
+
+nav[data-display="desktop"] {
+	grid-area: menubar;
+	min-width: 350px;
+}
+
+nav[data-display="mobile"] {
+	grid-area: sidebar;
+	background-color: #fff;
+
+	height: 100vh;
+	min-height: 100vh;
+
+	overflow-x: hidden;
+	text-wrap: nowrap;
+
+	transition: width 300ms ease, opacity 300ms ease;
+
+	box-shadow: 6px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+main {
+	grid-area: main;
+	position: relative;
+	min-width: 350px;
+}
+
+footer {
+	grid-area: footer;
+	position: relative;
+	min-width: 350px;
+}
+
+
+.hidden {
+	display: none !important;
+}
+
+.header-scrolled {
+	position: fixed;
+	transition: top .5s ease;
+}
+
+.header-shadowed {
+	box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.head-right {
+	display: flex;
+	justify-content: flex-end;
+	column-gap: 10px;
+}
+
+
+
+
+/* Desktop */
+@media screen and (min-width: 1025px) {
+	[data-display="mobile"] {display: none !important;}
+
+	.head-mainrow {
+		height: 80px;
+		min-height: 80px;
+	}
+	
+	.logo {
+		background-image: url("transfashionid-logo-text-135x40.svg");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 135px 40px;
+
+		width: 135px;
+		height: 40px;
+	}
+	
+	.head-left {
+		margin-top: 20px;
+		margin-left: 20px;
+	}
+
+	.head-right {
+		margin-top: 20px;
+		margin-right: 20px;
+	}
+
+
+	#sidebar {
+		display: none;
+	}
+}
+
+
+
+
+/* Mobile */
+@media screen and (max-width: 1024px) {
+	[data-display="desktop"] {display: none !important;}
+
+	.head-mainrow {
+		height: 30px;
+		min-height: 30px;	
+	}
+
+	.logo {
+		margin-top: 10px;
+		margin-bottom: 5px;
+		background-image: url("transfashionid-logo-icon-40x40.svg");
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: 28px 28px;
+
+		width: 28px;
+		height: 28px;
+	}
+
+	.head-left {
+		margin-top: 5px;
+		margin-left: 5px;
+	}
+
+	.head-right {
+		margin-top: 10px;
+		margin-right: 10px;
+	}
+
+	#sidebar {
+		display: flex;
+		flex-direction: column;	
+	}
+
+	#sidebar .sidebar-header {
+		display: grid;
+		grid-gap: 0;
+		grid-template-columns: 1fr auto 1fr;
+		grid-template-rows: auto;
+		grid-template-areas: 
+			"head-left head-middle head-right"
+		;
+		background-color: #ccc;
+	}
+
+	.sidebar-header-fixed {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.sidebar-hidden {
+		position: fixed;	
+		width: 0;
+		opacity: 0;
+	}
+	
+	.sidebar-showed {
+		opacity: 1;
+		width: 100vw !important;
+	}
+
+}

@@ -1,0 +1,14 @@
+{
+	"name": "TransFashion",
+	"short_name": "TransFashion",
+	"lang": "en-US",
+	"start_url": "/",
+	"display": "standalone",
+	"theme_color": "#000000",
+	"icons": [
+	  {
+		"src": "template/transfashionid-icon-32x32.png",
+		"sizes": "32x32"
+	  }
+	]
+}
