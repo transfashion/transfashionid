@@ -44,6 +44,13 @@
 	</head>
 
 	<body>
+		<!-- 
+		CATATAN DESIGNER:	
+		* tata letak tag, main, footer, header, dan lain lain JANGAN DIUBAH URUTANNYA
+		* karena diatur sesuai layer, sehingga tidak perlu menggunakan z-index
+		* urutan tata letak tidak berpengaruh pada posisi di layar, karena menggunakan GRID LAYOUT
+		-->
+		
 		<main id="main">
 			<?=$tpl->getMainContent()?> 
 		</main>
@@ -52,66 +59,99 @@
 			<p>Copyright &copy; <?=date('Y')?>. All rights reserved.</p>
 		</footer>
 
+		<div id="main-mask" class="hidden">
+		</div>
+
+
 		<header id="head">
-			<div class="dw-promoter hidden" style="grid-area: promoter">
+			
+			<!-- PROMOTER:BEGIN -->
+			<div class="dw-promoter" style="grid-area: promoter">
 				<span style="grid-area: running-text">
 				</span>
 				<button style="grid-area: button"></button>
 			</div>
+			<!-- PROMOTER:END -->
+	
 
-
+			<!-- HEADER LEFT:BEGIN -->
 			<div class="head-mainrow head-left" style="grid-area: head-left" data-display="mobile">
-				<button id="btn_page_sidebar_show" class="dw-iconbutton" data-icon="menu"></button>
+				<button id="btn_sidebar_show" class="dw-iconbutton" data-icon="menu"></button>
 			</div>
 			<div class="head-mainrow head-left" style="grid-area: head-left" data-display="desktop">
 				<div class="dw-searchbox" style="width: 200px">
-					<input type="text" placeholder="Search for product">
+					<input id="input_desktop_search" type="text" placeholder="Search for product (d)" closeonblur="true">
 					<button></button>
 				</div>
 			</div>
-			
-			<a class="head-mainrow head-middle logo" style="grid-area: head-middle" href="/">
-				<!-- LOGO -->
-			</a>
-			
-			
+			<!-- HEADER LEFT:END -->
+
+
+			<!-- HEADER RIGHT:BEGIN -->
 			<div class="head-mainrow head-right" style="grid-area: head-right;" data-display="mobile">
 				<button class="dw-iconbutton" data-icon="account"></button>
 				<button class="dw-iconbutton" data-icon="chart"></button>
-				<button class="dw-iconbutton" data-icon="search"></button>
+				<button id="btn_search_togle" class="dw-iconbutton" data-icon="search"></button>
 			</div>
 			<div class="head-mainrow head-right" style="grid-area: head-right;" data-display="desktop">
 				<button class="dw-iconbutton" data-icon="account">Login / Register</button>
 				<button class="dw-iconbutton" data-icon="chart">Cart</button>
 			</div>
+			<!-- HEADER RIGHT:END -->	
+
+
+
+			<!-- HEADER MIDDLE:BEGIN -->
+			<div class="head-mainrow head-middle" style="grid-area: head-middle">
+				<!-- LOGO: BEGIN -->
+				<a href="/">
+					<div class="logo">
+					</div>
+				</a>
+				<!-- LOGO: END -->
+
+				<!-- SEARCH DIALOG: BEGIN -->
+				<div id="searchdialog" class="hidden">
+					<div class="head-searchbar" data-display="mobile">
+						<div class="dw-searchbox" style="width: 100%">
+							<input id="input_mobile_search" type="text" placeholder="Search for product (m)">
+							<button functional="close"></button>
+						</div>
+					</div>
+					<div class="head-searchresult">
+						<div id="searchdialog-empty" >
+							Your search did not match any documents
+						</div>
+						<div id="searchdialog-popular">
+							<div>Try popular search terms:</div>
+							<div>bags</div>
+							<div>shoes</div>
+							<div>accessories</div>
+						</div>
+
+					</div>
+				</div>
+				<!-- SEARCH DIALOG: END -->
+			</div>
+			<!-- HEADER MIDDLE:END -->
 
 			<nav id="mainmenu-desktop" style="grid-area: menubar" data-display="desktop">
 				<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'nav-desktop.phtml']) ?>
 			</nav>
-			
-			<div id="searchbar" class="head-searchbar hidden" style="grid-area: searchbar">
-				searchbar
-			</div>
-			<div id="searchresult" class="head-searchresult hidden" style="grid-area: searchresult">
-				search result
-			</div>
 		</header>	
 
 		<nav id="sidebar" class="sidebar-hidden" data-display="mobile">
 			<div class="sidebar-header">
 				<div class="sidebar-header" style="grid-area: head-left;"></div>
 				<div class="sidebar-header logo" style="grid-area: head-middle;"></div>
-				<div class="sidebar-header" style="grid-area: head-right; display: flex; justify-content: flex-end; margin-right: 10px; margin-top: 5px;">
-					<button  id="btn_page_sidebar_hide" class="dw-iconbutton" data-icon="close"></button>
+				<div class="sidebar-header" style="grid-area: head-right; display: flex; justify-content: flex-end; margin-right: 10px; margin-top: 3px;">
+					<button  id="btn_sidebar_hide" class="dw-iconbutton" data-icon="close"></button>
 				</div>
 			</div>
 			<div class="sidebar-nav">
 				<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'nav-mobile.phtml'])?>
 			</div>
 		</nav>
-
-
-
 	</body>	
 	<?=$tpl->getBlockContent('footer-script')?>
 	<script>

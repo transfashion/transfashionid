@@ -25,6 +25,7 @@
 	border: none;
 	outline: none;
 	padding: 2px;
+	font-size: 1em;
 }
 
 .dw-searchbox button {
@@ -43,10 +44,18 @@
 	filter: opacity(0.5);
 }
 
-.dw-searchbox:has(input[type="text"]:not(:placeholder-shown)) button {
+/* .dw-searchbox:has(input[type="text"]:not(:placeholder-shown)) button {
 	background-image: url('dw-icons/icon-silang.svg');
 	background-size: 12px 12px;
 
+} */
+
+.dw_searchbox_button_close {
+	background-image: url('dw-icons/icon-silang.svg') !important;
+	background-size: 12px 12px;
 }
+
+
+
 
 

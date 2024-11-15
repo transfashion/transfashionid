@@ -54,8 +54,6 @@ header {
 		"promoter promoter promoter"
 		"head-left head-middle head-right"
 		"menubar menubar menubar"
-		"searchbar searchbar searchbar"
-		"searchresult searchresult searchresult"
 	;
 
 	background-color: white;
@@ -125,16 +123,50 @@ footer {
 	column-gap: 10px;
 }
 
+.head-searchresult {
+	background-color: #fff;
+}
 
 
+
+#main-mask {
+	position: fixed;
+	top: 0; 
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#searchdialog {
+	background-color: #fff;
+	position: absolute;
+	left:0;
+	right: 0 ;
+	margin-top: 10px;
+
+	min-height: 100px;
+
+	box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.4);
+}
+
+#searchdialog-popular {
+	margin-top: 20px;
+}
 
 /* Desktop */
 @media screen and (min-width: 1025px) {
 	[data-display="mobile"] {display: none !important;}
 
+	main {
+		margin-top: 151px;
+	}
+
+
 	.head-mainrow {
-		height: 80px;
-		min-height: 80px;
+		height: 55px;
+		min-height: 55px;
+		
 	}
 	
 	.logo {
@@ -142,14 +174,19 @@ footer {
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 135px 40px;
-
 		width: 135px;
 		height: 40px;
 	}
 	
+	
+
 	.head-left {
 		margin-top: 20px;
 		margin-left: 20px;
+	}
+
+	.head-middle {
+		padding-top: 15px;
 	}
 
 	.head-right {
@@ -161,6 +198,12 @@ footer {
 	#sidebar {
 		display: none;
 	}
+
+
+	#searchdialog .head-searchresult {
+		margin: 10px 20px 20px 20px;
+	}
+
 }
 
 
@@ -170,19 +213,22 @@ footer {
 @media screen and (max-width: 1024px) {
 	[data-display="desktop"] {display: none !important;}
 
+
+	main {
+		margin-top: 73px;
+	}
+
+
 	.head-mainrow {
 		height: 30px;
-		min-height: 30px;	
+		min-height: 30px;
 	}
 
 	.logo {
-		margin-top: 10px;
-		margin-bottom: 5px;
 		background-image: url("transfashionid-logo-icon-40x40.svg");
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 28px 28px;
-
 		width: 28px;
 		height: 28px;
 	}
@@ -190,6 +236,11 @@ footer {
 	.head-left {
 		margin-top: 5px;
 		margin-left: 5px;
+	}
+
+	.head-middle {
+		padding-top: 10px;
+		padding-bottom: 10px;
 	}
 
 	.head-right {
@@ -213,6 +264,11 @@ footer {
 		background-color: #ccc;
 	}
 
+	#sidebar .sidebar-header .logo {
+		padding-top: 5px;
+		padding-bottom: 5px;
+	}
+
 	.sidebar-header-fixed {
 		position: fixed;
 		top: 0;
@@ -230,5 +286,16 @@ footer {
 		opacity: 1;
 		width: 100vw !important;
 	}
+
+
+
+	#searchdialog .head-searchbar {
+		margin: 20px 20px 0 20px;
+	}
+
+	#searchdialog .head-searchresult {
+		margin: 30px 20px 20px 20px;
+	}
+
 
 }
