@@ -1,8 +1,10 @@
 <?php 
 	define('__TEMPLATE_NAME__', 'transfashionid');
+	define('__SEARCH_PLACEHOLDER__', 'Search for product');
 
-	use AgungDhewe\Webservice\WebTemplate;
-	$tpl = WebTemplate::getTemplateObject($this);
+
+	use Transfashion\Transfashionid\Template;
+	$tpl = Template::getTemplate($this);
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -14,25 +16,18 @@
 		<link rel="manifest" href="manifest.json">
 		
 		<style>
-			:root {
-				--promoter-h-desktop: 23px;
-				--promoter-h-mobile: 23px;
 
-				--header-h-desktop: 80px;
-				--header-h-mobile: 50px;
-
-				--logo-w-desktop: 135px;
-				--logo-h-desktop: 40px;
-
-				--logo-w-mobile: 30px;
-				--logo-h-mobile: 30px;
-			}
 		</style>
 		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl(__TEMPLATE_NAME__.'.css')?>">
 		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-promoter.css')?>">
 		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-style.css')?>">
 		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-searchbox.css')?>">
 		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-dropdownmenu.css')?>">
+		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-pagemask.css')?>">
+		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/sosmed-icons/icons.css')?>">
+
+		<link rel="preload" href="<?=$tpl->getTemplateAssetUrl('transfashionid-logo-icon-40x40.svg')?>" as="image" type="image/svg+xml">
+		<link rel="preload" href="<?=$tpl->getTemplateAssetUrl('transfashionid-logo-text-135x40.svg')?>" as="image" type="image/svg+xml">
 
 
 		<?=$tpl->getBlockContent('header-metadata')?> 
@@ -56,21 +51,29 @@
 		</main>
 
 		<footer>
-			<p>Copyright &copy; <?=date('Y')?>. All rights reserved.</p>
+			<nav>
+				<?php $tpl->includeFooterNavContent() ?>
+			</nav>
 		</footer>
+		<div class="footer-copyrightbar">&copy;<?=date('Y')?>. PT. Trans Fashion Indonesia. All rights reserved.</div>
 
+		
+		<!-- MASKING MAIN DIV: BEGIN -->
 		<div id="main-mask" class="hidden">
 		</div>
-
+		<!-- MASKING MAIN DIV: END -->
 
 		<header id="head">
 			
 			<!-- PROMOTER:BEGIN -->
+			 <?php if ($promotertext=$tpl->getPromoterText()) { ?>
 			<div class="dw-promoter" style="grid-area: promoter">
 				<span style="grid-area: running-text">
+					<span><?=$promotertext?></span>
 				</span>
 				<button style="grid-area: button"></button>
 			</div>
+			<?php } ?>
 			<!-- PROMOTER:END -->
 	
 
@@ -80,7 +83,7 @@
 			</div>
 			<div class="head-mainrow head-left" style="grid-area: head-left" data-display="desktop">
 				<div class="dw-searchbox" style="width: 200px">
-					<input id="input_desktop_search" type="text" placeholder="Search for product (d)" closeonblur="true">
+					<input id="input_desktop_search" type="text" placeholder="<?=__SEARCH_PLACEHOLDER__?>" closeonblur="true">
 					<button></button>
 				</div>
 			</div>
@@ -89,12 +92,12 @@
 
 			<!-- HEADER RIGHT:BEGIN -->
 			<div class="head-mainrow head-right" style="grid-area: head-right;" data-display="mobile">
-				<button class="dw-iconbutton" data-icon="account"></button>
+				<button class="dw-iconbutton headLoginRegister" data-icon="account" onclick="window.location='/page/login'"></button>
 				<button class="dw-iconbutton" data-icon="chart"></button>
 				<button id="btn_search_togle" class="dw-iconbutton" data-icon="search"></button>
 			</div>
 			<div class="head-mainrow head-right" style="grid-area: head-right;" data-display="desktop">
-				<button class="dw-iconbutton" data-icon="account">Login / Register</button>
+				<button class="dw-iconbutton headLoginRegister" data-icon="account" onclick="window.location='/page/login'">Login / Register</button>
 				<button class="dw-iconbutton" data-icon="chart">Cart</button>
 			</div>
 			<!-- HEADER RIGHT:END -->	
@@ -114,19 +117,19 @@
 				<div id="searchdialog" class="hidden">
 					<div class="head-searchbar" data-display="mobile">
 						<div class="dw-searchbox" style="width: 100%">
-							<input id="input_mobile_search" type="text" placeholder="Search for product (m)">
+							<input id="input_mobile_search" type="text" placeholder="<?=__SEARCH_PLACEHOLDER__?>">
 							<button functional="close"></button>
 						</div>
 					</div>
 					<div class="head-searchresult">
-						<div id="searchdialog-empty" >
-							Your search did not match any documents
+						<div id="searchdialog-result" class="hidden">
+							search result
 						</div>
-						<div id="searchdialog-popular">
+						<div id="searchdialog-popular" class="hidden">
 							<div>Try popular search terms:</div>
-							<div>bags</div>
-							<div>shoes</div>
-							<div>accessories</div>
+							<a>bags</a><br>
+							<a>shoes</a><br>
+							<a>accessories</a><br>
 						</div>
 
 					</div>
@@ -135,8 +138,8 @@
 			</div>
 			<!-- HEADER MIDDLE:END -->
 
-			<nav id="mainmenu-desktop" style="grid-area: menubar" data-display="desktop">
-				<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'nav-desktop.phtml']) ?>
+			<nav id="mainmenu-desktop" style="grid-area: menubar; opacity: 0" data-display="desktop">
+				<?php $tpl->includeMenubarNavContent() ?>
 			</nav>
 		</header>	
 
@@ -149,14 +152,28 @@
 				</div>
 			</div>
 			<div class="sidebar-nav">
-				<?php require_once join(DIRECTORY_SEPARATOR, [__DIR__, 'nav-mobile.phtml'])?>
+				<?php $tpl->includeSidebarNavContent() ?>
 			</div>
 		</nav>
+
+
+		<!--	
+		<div class="dw-pagemask">
+			<div style="grid-area: messagebox">
+				ini test message
+			</div>	
+		</div>
+		-->
+
 	</body>	
 	<?=$tpl->getBlockContent('footer-script')?>
 	<script>
 		window.addEventListener("load", async (event) => {
-			await window.$uilayout.Init()
+			await window.$uilayout.Init();
+			var main = document.querySelector('main');
+			var menu = document.getElementById('mainmenu-desktop');
+			main.style.opacity = 1;
+			menu.style.opacity = 1;
 		})
 	</script>
 	<script type="module">

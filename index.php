@@ -8,6 +8,9 @@ use AgungDhewe\Webservice\Router;
 use AgungDhewe\Webservice\Routes\PageRoute;
 
 
+use Transfashion\Transfashionid\LoginPage;
+
+
 // script ini hanya dijalankan di web server
 if (php_sapi_name() === 'cli') {
 	die("Script cannot be executed directly from CLI\n\n");
@@ -32,9 +35,13 @@ try {
 
 	// Prepare debug
 	PageRoute::ResetDebugOnPageRequest(["page/*", 'content/*']);
+	PageRoute::addPageHandler('page/login', LoginPage::class);
 
 	// Route internal
 	Router::setupDefaultRoutes();
+
+	Router::POST('page/login', PageRoute::class); // allow POST ke halaman login
+
 
 	// Serve url
 	Service::main();

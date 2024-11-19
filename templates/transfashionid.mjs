@@ -13,6 +13,9 @@ const mainmask = document.getElementById('main-mask');
 const sidebar = document.getElementById('sidebar');
 const searchdialog = document.getElementById('searchdialog');
 
+const searchdialog_result = document.getElementById('searchdialog-result');
+const searchdialog_popular = document.getElementById('searchdialog-popular');
+
 const btn_sidebar_show = document.getElementById('btn_sidebar_show');
 const btn_sidebar_hide = document.getElementById('btn_sidebar_hide');
 const btn_search_togle = document.getElementById('btn_search_togle');
@@ -20,6 +23,7 @@ const btn_search_togle = document.getElementById('btn_search_togle');
 
 
 let prevScrollY = 0;
+let prevSearchText = '';
 
 export async function Init(opt) {
 	if ('scrollRestoration' in history) {
@@ -30,12 +34,21 @@ export async function Init(opt) {
 	head.PrevMarginTop = 0
 
 	window.scrollTo(0, 0);
-	window.addEventListener('resize', _.throttle(window_resize, 500), { passive: true});  // underscore-esm-min.mjs
+	window.addEventListener('resize', _.throttle(window_resize, 100), { passive: true});  // underscore-esm-min.mjs
 	window.addEventListener("scroll", _.throttle(window_scroll, 100), { passive: true});  // underscore-esm-min.mjs	
 
-	Promoter.Init({}, (info)=>{ window_resize(); }); // init promoter
+	Promoter.Init({
+		onVisibilityChanged : () => {
+			promoter_visibilitychanged();
+		},
+		onLoad: (fn_settext) => {
+			promoter_load(fn_settext)
+		},
+		onClose: () => {
+			promoter_close()
+		}
+	});
 	
-	// init searchbox
 	Searchbox.Init({
 		onSearch: (searchtext) => {
 			searchbox_search(searchtext);
@@ -125,30 +138,95 @@ function sidebar_show(show) {
 	}
 }
 
+
+async function promoter_visibilitychanged() {
+	window_resize();
+}
+
+
+async function promoter_close() {
+	window_resize();
+}
+
+async function promoter_load(fn_settext) {
+	var text = 'Dapatkan tambahan discount <b>50%</b> setiap pembelian 2 pairs di <b>GEOX Kota Casablanca</b>,'
+	text += ' berlaku <b>hanya hari ini</b> Rabu, 13 November 2024';
+
+	fn_settext(text)
+	window_resize();
+}
+
+
+
 async function searchbox_close() {
 	searchdialog.classList.add('hidden');
 	mainmask.classList.add('hidden');
+	prevSearchText = '';
 }
 
 
 async function searchbox_search(searchtext) {
+	searchdialog_popular.classList.remove('hidden');
 	if (!searchdialog.checkVisibility()) {
 		searchdialog.classList.remove('hidden');
 		mainmask.classList.remove('hidden');
 	}
 
 	// do search
-	searchtext = searchtext.toLowerCase();
-	if (searchtext=="shoes" || searchtext=="bag" || searchtext=="accessories" || searchtext=="bags") {
-		// ketemu
-	
-	} else {	
-		// tidak ketemu
-		
+	searchtext = searchtext.toLowerCase().trim();
+	if (searchtext.length>0) {
+		searchdialog_result.classList.remove('hidden');
+		var insearching = do_search(searchtext)
+		if (insearching) {
+			searchdialog_result.innerHTML = `Searching <b>${searchtext}</b>...`
+		}
+	} else {
+		searchdialog_result.classList.add('hidden');
+	}
+}
+
+
+function do_search(searchtext) {
+	if (searchtext==prevSearchText) {
+		return false
 	}
 
+	var call_search_api = async (callback) => {
+		var result = await SEARCH_SIMULATION(searchtext)
+		callback(result)
+	}
 
+	call_search_api((result)=> {
+		if (result==null) {
+			searchdialog_result.innerHTML = `Your search <b>${searchtext}</b> did not match any documents`;
+		} else {
+			searchdialog_result.innerHTML = "ini hasilnya";
+			searchdialog_popular.classList.add('hidden');
+		}
+	})
+	
 
+	prevSearchText = searchtext
+	return true
+}
+
+async function SEARCH_SIMULATION(searchtext) {
+	return new Promise((resolve)=>{
+		setTimeout(()=>{
+			// simulasi search yang membutuhkan waktu sekitar 1 detik
+			if (searchtext=="shoes" || searchtext=="bag" || searchtext=="accessories" || searchtext=="bags") {
+				// ketemu
+				resolve([
+					{name: "item 1", price: 10000000},
+					{name: "item 2", price: 4000000},
+					{name: "item 3", price: 15000}
+				]);
+			} else {
+				// tidak ketemu
+				resolve(null)
+			}
+		}, 1000);
+	})
 }
 
 

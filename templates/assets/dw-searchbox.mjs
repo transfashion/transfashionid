@@ -8,6 +8,8 @@ const input_desktop = document.getElementById(input_desktop_name);
 const input_mobile  = document.getElementById(input_mobile_name);
 const searchInputs = document.querySelectorAll('.dw-searchbox input');
 const searchButtons = document.querySelectorAll('.dw-searchbox button');
+const searchPopularContainer = document.getElementById('searchdialog-popular');
+const searchPopulars = searchPopularContainer.querySelectorAll('a');
 
 
 let Options = {}; 
@@ -40,7 +42,27 @@ async function searchbox_init(opt) {
 			btn.classList.add('dw_searchbox_button_close')
 		}
 	});
+
+	searchPopulars.forEach(link => {
+		let searchtext = link.textContent;
+		link.setAttribute('href', 'javascript:void(0)');
+		link.onclick = () => {
+			searchInputs.forEach(input => {
+				input.value = searchtext
+			})
+
+			searchButtons.forEach(btn => {
+				btn.classList.add('dw_searchbox_button_close')
+			});
+
+			if (typeof Options.onSearch === 'function') {
+				Options.onSearch(searchtext);
+			}
+		}
+	});
 }
+
+
 
 
 function searchbox_keyup(e) {
@@ -93,13 +115,15 @@ function searchbox_button_click(btn) {
 
 function searcbox_input_blur(evt) {
 	// cek text
-	var searchtext = evt.target.value;
-	if (searchtext.length==0) {
-		var closeonblur = evt.target.getAttribute('closeonblur');
-		if (closeonblur=='true') {
-			if (typeof Options.onClose === 'function') {
-				Options.onClose();
+	setTimeout(()=>{
+		var searchtext = evt.target.value;
+		if (searchtext.length==0) {
+			var closeonblur = evt.target.getAttribute('closeonblur');
+			if (closeonblur=='true') {
+				if (typeof Options.onClose === 'function') {
+					Options.onClose();
+				}
 			}
 		}
-	}
+	}, 1000);
 }

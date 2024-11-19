@@ -1,0 +1,96 @@
+<?php 
+use Transfashion\Transfashionid\LoginPage;
+$page = LoginPage::getAuthenticationPageObject($this);
+$tpl = $page->getTemplate();
+?>
+{block name="title"}Login{/block}
+
+{block name="header-style"}
+<style>
+	article {
+		display: grid;
+		grid-template-columns: 1fr auto 1fr;
+		grid-template-rows: 1fr auto auto auto 1fr;
+		grid-template-areas: 
+			". . ."
+			"greet greet greet"
+			"walogin walogin walogin"
+			". form ."
+			". . ."
+		;
+		height: 100%;
+	}
+
+
+	form {
+		display: flex;
+		flex-direction: column;
+		row-gap: 8px;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.waloginbutton {
+		border: 0;
+	
+		cursor: pointer;
+		background-color: #fff;
+		background-image: url(<?=$tpl->getTemplateAssetUrl('assets/sosmed-icons/whatsapp-color.svg')?>);
+		background-repeat: no-repeat;
+		background-size: 56px 56px;	
+		background-position-x: 8px;	
+		background-position-y: -3px;	
+		background-color: transparent;
+
+		color: #000;
+		border: 1px solid rgba(0, 0, 0, .1);
+		/* box-shadow: 1px 1px 3px rgba(0,0,0,.5); */
+
+		outline: none;
+
+
+		text-align: left;
+		
+		padding: 10px 30px 10px 60px;
+		font-size: 1em;
+		font-weight: normal;
+
+		margin: 20px;
+		
+	}
+
+	.waloginbutton:hover {
+		text-decoration: underline;
+	}
+
+	.headLoginRegister {
+		display: none !important;
+	}
+
+</style>	
+{/block}
+
+
+<article class="loginform">
+	<div style="grid-area: greet; display: flex; justify-content: center;">
+		<div>
+			<b>Welcome, Trans Fashion Member</b>
+		</div>
+	</div>
+
+	<div style="grid-area: walogin; display: flex; justify-content: center;">
+		<button class="waloginbutton" onclick="window.location='/page/login-via-whatsapp'">
+			Login/Register via Whatsapp<br>
+			(easier, recomended)
+		</button>
+	</div>
+
+	<form action="/page/login" method="post" style="grid-area: form">
+		<input type="hidden" name="nonce" value="<?=$page->getData('nonce')?>">
+		<div><input name="email" placeholder="Email"></div>
+		<div><input name="password" placeholder="Password" type="password"></div>
+		<div><input type="submit" value="submit"></div>
+		<div><a href="/page/register">Register</a></div>
+	</form>
+</article>
+

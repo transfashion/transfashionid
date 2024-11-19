@@ -1,0 +1,70 @@
+<?php 
+use AgungDhewe\Webservice\Page;
+use AgungDhewe\Webservice\Session;
+
+$page = Page::getWebPageObject($this);
+$tpl = $page->getTemplate();
+?> 
+
+{block name="header-style"}
+<style>
+	article > div {
+		text-align: center;
+	}
+	
+	#pnl_unconfirm {
+		color: #800000;
+	}
+
+	.headLoginRegister {
+		display: none !important;
+	}
+</style>
+<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-form.css')?>">
+{/block}
+
+<article>
+	<div style="font-weight:bold; font-size: 1.3em; margin-bottom: 20px">
+		Login / Register via Whatsapp
+	</div>
+	<div style="margin-bottom: 20px">
+		To proceed with the login process, you will be redirected to the WhatsApp application.<br> 
+		In the app, a message will be automatically filled in,<br>
+		and you only need to send it without any edits.<br> 
+	</div>
+	<div style="margin-bottom: 20px">
+		<label class="dw-input-checkbox">
+			<input id="chk_confirm" type="checkbox" value="<?=Session::Id()?>">
+			<span class="checkmark"></span>
+			I Understand
+		</label>
+	</div>
+
+	<div id="pnl_unconfirm" class="hidden" style="margin-bottom: 10px">
+		Please confirm that you understand to continue.
+	</div>
+
+	<div style="margin-bottom: 100px">
+		<button id="btn_LoginViaWa" disabled>Continue Login via Whatsapp</button>
+	</div>
+
+</article>
+
+
+
+{block name="footer-script"}
+<script>
+	window.addEventListener("load", async (event) => {
+		if (window.$module!=null) {
+			await window.$module.Init()
+		} else {
+			console.error("module 'login-via-whatsapp.mjs' not loaded")
+		}
+	})
+</script>
+<script type="module">
+	import * as uimodule from '<?=$page->getPageAssetUrl('login-via-whatsapp.mjs')?>'
+	window.$module = uimodule
+</script>
+{/block}
+
