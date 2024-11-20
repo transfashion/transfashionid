@@ -35,6 +35,7 @@
 
 .dw-input-checkbox > input:checked ~ span {
 	background-color: #000;
+	border: 1px solid #000;
 } 
 
 .dw-input-checkbox > input:checked ~ span:after {

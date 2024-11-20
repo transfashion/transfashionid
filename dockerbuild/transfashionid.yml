@@ -15,9 +15,9 @@ services:
     volumes:
       - ./docker-php-ext-xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
       - ./webserver.conf:/etc/apache2/sites-available/webserver.conf
-      - ./../../../agungdhewe/webservice:/home/agung/Development/agungdhewe/webservice:consistent
-      - ./../:/home/agung/Development/transfashion/transfashionid:consistent
-    working_dir: /home/agung/Development/transfashion/transfashionid 
+      - ./../../../agungdhewe/webservice:/home/transfashion/agungdhewe/webservice:consistent
+      - ./../:/home/transfashion/development/dev.transfashion.id:consistent
+    working_dir: /home/transfashion/development/dev.transfashion.id 
 
 networks:
   devnetwork:

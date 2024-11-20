@@ -5,6 +5,7 @@ use AgungDhewe\Webservice\WebTemplate;
 
 class Template extends WebTemplate implements ITemplate {
 	const string DEFAULT_NAME = "transfashionid";
+	
 
 	private string $tpldir;
 

@@ -7,7 +7,7 @@ export async function Init() {
 
 
 	btn_LoginViaWa.addEventListener('click', () => {
-		btnLoginViaWa_click();
+		btn_LoginViaWa_click();
 	});
 
 	chk_confirm.addEventListener('click', ()=>{
@@ -16,18 +16,25 @@ export async function Init() {
 }
 
 
-function btnLoginViaWa_click() {
-	console.log('click')
-	if (!chk_confirm.checked) {
-		pnl_unconfirm.classList.add('hidden');
-		return;
-	}
-}
-
 function chk_confirm_click() {
 	if (!chk_confirm.checked) {
 		btn_LoginViaWa.disabled = true
 	} else {
 		btn_LoginViaWa.disabled = false
 	}
+}
+
+function btn_LoginViaWa_click() {
+	if (!chk_confirm.checked) {
+		pnl_unconfirm.classList.add('hidden');
+		return;
+	}
+
+	var sessid = chk_confirm.value
+	var msg = `Hai Transfashion,\nSaya ingin #login-website-transfashion via whatsapp\n[ref:${sessid}]`;
+	var encodedMsg = encodeURIComponent(msg);
+	var phone = window.$global.wa_number;
+	var url = `https://api.whatsapp.com/send/?phone=${phone}&text=${encodedMsg}`
+
+	window.open(url, '_blank');
 }

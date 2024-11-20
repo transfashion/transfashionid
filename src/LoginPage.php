@@ -1,4 +1,5 @@
-<?php namespace Transfashion\Transfashionid;
+<?php declare(strict_types=1);
+namespace Transfashion\Transfashionid;
 
 use \AgungDhewe\PhpLogger\Log;
 
@@ -17,6 +18,7 @@ class LoginPage extends Page implements IAuthenticationPage
 			Log::debug('hanya GET');
 		}
 
+		Log::debug($params);
 		parent::LoadPage($requestedContent, $params);
 	}
 

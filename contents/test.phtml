@@ -1,0 +1,25 @@
+{block name="title"}Halaman Test{/block}
+{block name="header-style"}
+
+<style>
+    .headLoginRegister {
+        display: none !important;
+    }
+</style>
+{/block}
+
+<h1>test halo</h1>
+
+<pre> deskripsi .....
+
+</pre>
+<button id='btn_test'>test button</button>
+{block name="footer-script"}
+<script>
+    var btn_test=document.getElementById('btn_test');
+    btn_test.addEventListener('click', () => {
+        console.log('test');
+    })
+</script>
+{/block}
+

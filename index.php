@@ -9,7 +9,9 @@ use AgungDhewe\Webservice\Routes\PageRoute;
 
 
 use Transfashion\Transfashionid\LoginPage;
-
+use Transfashion\Transfashionid\CheckoutPage;
+use Transfashion\Transfashionid\ProductDetilPage;
+use Transfashion\Transfashionid\ProductListPage;
 
 // script ini hanya dijalankan di web server
 if (php_sapi_name() === 'cli') {
@@ -36,12 +38,16 @@ try {
 	// Prepare debug
 	PageRoute::ResetDebugOnPageRequest(["page/*", 'content/*']);
 	PageRoute::addPageHandler('page/login', LoginPage::class);
+	PageRoute::addPageHandler('page/checkout', CheckoutPage::class);
+	PageRoute::addPageHandler('page/product/*', ProductDetilPage::class);
+	PageRoute::addPageHandler('page/list/*', ProductListPage::class);
+
 
 	// Route internal
 	Router::setupDefaultRoutes();
 
-	Router::POST('page/login', PageRoute::class); // allow POST ke halaman login
-
+	Router::POST('page/login', PageRoute::class);
+	Router::POST('page/checkout', PageRoute::class);
 
 	// Serve url
 	Service::main();
