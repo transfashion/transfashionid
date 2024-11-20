@@ -1,9 +1,12 @@
 #!/bin/bash 
 
-URL="http://localhost:8007"
+URL="http://localhost:8007/api/Transfashion/Transfashionid/TestApi/Coba"
 
-echo GET $URL
-curl -D - \
+echo POST $URL
+curl -X POST \
+     -D - \
+	 -H "Content-Type: application/json" \
+     -d '{"request":{"kedua": "isi kedua", "pertama": "isi pertama" }}' \
 	 $URL
 
 

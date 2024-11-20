@@ -1,4 +1,5 @@
-<?php namespace Transfashion\Transfashionid;
+<?php declare(strict_types=1);
+namespace Transfashion\Transfashionid;
 
 use AgungDhewe\Webservice\WebTemplate;
 

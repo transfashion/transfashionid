@@ -22,7 +22,10 @@ class LoginPage extends Page implements IAuthenticationPage
 		parent::LoadPage($requestedContent, $params);
 	}
 
-	static function getAuthenticationPageObject(object $obj) : IAuthenticationPage {
+	static function getPageObject(object $obj) : IAuthenticationPage {
+		if (!($obj instanceof LoginPage)) {
+			throw new \Exception('Handler of this page is not LoginPage');
+		}
 		return $obj;
 	}
 
