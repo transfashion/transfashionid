@@ -1,7 +1,7 @@
 .DS_Store
 .vscode
 
-/dockerbuild-*
+/local
 /plugins
 /modules
 /vendor
@@ -15,4 +15,3 @@ debug.txt
 config-*.php
 
 
-*.local.code-workspace

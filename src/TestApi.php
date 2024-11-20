@@ -16,7 +16,9 @@ class TestApi extends WebApi {
 		return false;
 	}
 
-
+	/**
+	 * @ApiMethod
+	 */
 	public function Coba(string $pertama, string $kedua) : array {
 		$ret = [
 			"status" => "success",
