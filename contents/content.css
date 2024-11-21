@@ -1,0 +1,22 @@
+.judul-artikel{
+    font-weight: bold;
+
+}
+article{
+    text-align: justify;
+    max-width: 100vw;
+    /* overflow-x: scroll; */
+}
+@media screen and (min-width: 1025px) {
+    .judul-artikel{
+        text-align: center;
+    
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .judul-artikel{
+        text-align: left;
+    
+    }
+}
