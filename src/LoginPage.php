@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 namespace Transfashion\Transfashionid;
 
-use \AgungDhewe\PhpLogger\Log;
+use AgungDhewe\PhpLogger\Log;
 
-use \AgungDhewe\Webservice\Page;
-use \AgungDhewe\Webservice\IAuthenticationPage;
+use AgungDhewe\Webservice\Page;
+use AgungDhewe\Webservice\IAuthenticationPage;
 
 
 class LoginPage extends Page implements IAuthenticationPage
