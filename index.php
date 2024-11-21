@@ -36,7 +36,7 @@ try {
 	Logger::ShowScriptReferenceToUser(false);
 
 	// Prepare debug
-	PageRoute::ResetDebugOnPageRequest(["page/*", 'content/*']);
+	PageRoute::ResetDebugOnPageRequest(["page/*", "content/*", "api/*"]);
 	PageRoute::addPageHandler('page/login', LoginPage::class);
 	PageRoute::addPageHandler('page/checkout', CheckoutPage::class);
 	PageRoute::addPageHandler('page/product/*', ProductDetilPage::class);

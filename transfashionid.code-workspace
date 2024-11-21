@@ -24,6 +24,7 @@
 			"**/plugins/*/*/composer*": true,
 			"**/plugins/*/*/config*": true,
 			"**/plugins/agungdhewe": true,
+			"**/vendor/*/*/[^src]*": true,
 		}
 	}
 }

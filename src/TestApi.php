@@ -6,16 +6,6 @@ use AgungDhewe\Webservice\WebApi;
 class TestApi extends WebApi {
 
 
-
-
-	protected function isNeedVerifierCode(string $name) : bool {  
-		return false;
-	}
-
-	protected function isNeedAuthentication(string $name, ?array $auth = []) : bool {
-		return false;
-	}
-
 	/**
 	 * @ApiMethod
 	 */
