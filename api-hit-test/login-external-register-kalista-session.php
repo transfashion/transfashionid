@@ -1,13 +1,14 @@
 <?php
 // URL tujuan
-$url = "http://localhost:8007/api/Transfashion/Transfashionid/apis/LoginExternal/RegisterKalistaSession";
+$url = "http://localhost:8007";
+$endpoint = "$url/api/Transfashion/Transfashionid/apis/LoginExternal/RegisterKalistaSession";
 
 
 
 // Data yang akan dikirim
 $data = [
 	"request" => [
-		"sessid" => "673ed76aae698"
+		"sessid" => "e8ee907d38db7df0de5a9525c5401229"
 	]
 ];
 
@@ -17,7 +18,7 @@ $data = [
 $jsonData = json_encode($data);
 
 // Inisialisasi cURL
-$ch = curl_init($url);
+$ch = curl_init($endpoint);
 
 // Mengatur opsi cURL
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Menerima output sebagai string

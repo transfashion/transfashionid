@@ -1,14 +1,12 @@
 <?php
 
-$url = "http://host.docker.internal:8132/public";
-$endpoint = "$url/api/Transfashion/KalistaApi/Session/RegisterExternalSession";
+$url = "https://agung.tfi.fgta.net/kalista";
+$endpoint = "$url/api/Transfashion/KalistaApi/TestHit/TestMethod";
 
 // Data yang akan dikirim
 $data = [
 	"request" => [
-		"payload" => [
-			"sessid" => "333"
-		]
+		"testParam" => 'ini test parameter dikirim via api'
 	]
 ];
 
@@ -28,6 +26,8 @@ try {
 	curl_setopt($ch, CURLOPT_POST, true); // Menggunakan metode POST
 	curl_setopt($ch, CURLOPT_HTTPHEADER, [
 		"Content-Type: application/json", // Header untuk JSON
+		"App-Id: transfashionid",
+		"App-Secret: n3k4n2fdmf3fse",
 		"Content-Length: " . strlen($jsonData)
 	]);
 	curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData); // Data yang dikirim
