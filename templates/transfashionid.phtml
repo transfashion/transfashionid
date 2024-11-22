@@ -26,8 +26,8 @@
 		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-pagemask.css')?>">
 		<link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/sosmed-icons/icons.css')?>">
 
-		<link rel="preload" href="<?=$tpl->getTemplateAssetUrl('transfashionid-logo-icon-40x40.svg')?>" as="image" type="image/svg+xml">
-		<link rel="preload" href="<?=$tpl->getTemplateAssetUrl('transfashionid-logo-text-135x40.svg')?>" as="image" type="image/svg+xml">
+		<!-- <link rel="preload" href="<?=$tpl->getTemplateAssetUrl('transfashionid-logo-icon-40x40.svg')?>" as="image" type="image/svg+xml"> -->
+		<!-- <link rel="preload" href="<?=$tpl->getTemplateAssetUrl('transfashionid-logo-text-135x40.svg')?>" as="image" type="image/svg+xml"> -->
 
 
 		<?=$tpl->getBlockContent('header-metadata')?> 
@@ -181,6 +181,8 @@
 	</script>
 	<script type="module">
 		import * as uilayout from './template/<?=__TEMPLATE_NAME__?>.mjs'
+		import * as api from './template/assets/dw-api.mjs'
 		window.$uilayout = uilayout
+		window.$api = api;
 	</script>
 </body>

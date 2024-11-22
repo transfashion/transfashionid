@@ -24,17 +24,34 @@ function chk_confirm_click() {
 	}
 }
 
-function btn_LoginViaWa_click() {
+async function btn_LoginViaWa_click() {
 	if (!chk_confirm.checked) {
 		pnl_unconfirm.classList.add('hidden');
 		return;
 	}
 
+	// daftarkan session id ke kalista
 	var sessid = chk_confirm.value
-	var msg = `Hai Transfashion,\nSaya ingin #login-website-transfashion via whatsapp\n[ref:${sessid}]`;
-	var encodedMsg = encodeURIComponent(msg);
-	var phone = window.$global.wa_number;
-	var url = `https://api.whatsapp.com/send/?phone=${phone}&text=${encodedMsg}`
+	var endpoint = '/api/Transfashion/Transfashionid/apis/LoginExternal/RegisterKalistaSession'
+	var parameter = {
+		sessid: sessid
+	}
+	
+	try {
+		var result = await window.$api.execute(endpoint, parameter);
+		console.log(result);
 
-	window.open(url, '_blank');
+	} catch (err) {
+		console.error(err);
+	}
+
+
+	
+	
+	// var msg = `Hai Transfashion,\nSaya ingin #login-website-transfashion via whatsapp\n[ref:${sessid}]`;
+	// var encodedMsg = encodeURIComponent(msg);
+	// var phone = window.$global.wa_number;
+	// var url = `https://api.whatsapp.com/send/?phone=${phone}&text=${encodedMsg}`
+
+	// window.open(url, '_blank');
 }
