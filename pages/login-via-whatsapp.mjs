@@ -99,24 +99,35 @@ async function btn_LoginViaWa_click() {
 			lnk.target = '_blank'
 		}
 
+		var autcheck = true;
+		if (autcheck) {
+			// cek status login di kalista
+			cekCount = 0
+			let interval = setInterval(async ()=>{
+				cekCount++;
+				var user = await LoginExternal_GetCustomerLoginSession(kalista_sessid)
+				if (user!=null)  {
+					clearInterval(interval);
+					location.href = '/page/welcome';
+				}
+			}, 2000)
 
-
-		// cek status login di kalista
-		cekCount = 0
-		let interval = setInterval(async ()=>{
-			cekCount++;
-			var user = await LoginExternal_GetCustomerLoginSession(kalista_sessid)
-			if (user!=null)  {
+			// kalau sudah 1 menit, hilangkan waiting spinner
+			setTimeout(()=>{
 				clearInterval(interval);
-				location.href = '/page/welcome';
+				location.href = '/page/login-via-whatsapp?timeout=1';
+			}, 1 * 60 * 1000) // 5 menit
+		} else {
+			// manual cek dengan klik di barcode
+			pnl_whatsapp_qrcode.onclick = async () => {
+				var user = await LoginExternal_GetCustomerLoginSession(kalista_sessid);
+				console.log(user);
+				if (user!=null)  {
+					location.href = '/page/welcome';
+				}
 			}
-		}, 2000)
-
-		// kalau sudah 1 menit, hilangkan waiting spinner
-		setTimeout(()=>{
-			clearInterval(interval);
-			location.href = '/page/login-via-whatsapp?timeout=1';
-		}, 1 * 60 * 1000) // 5 menit
+		}
+		
   
 		
 	} catch (err) {

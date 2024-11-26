@@ -3,6 +3,7 @@ namespace Transfashion\Transfashionid;
 
 use AgungDhewe\Webservice\Page;
 use AgungDhewe\Webservice\Session;
+use AgungDhewe\Webservice\Service;
 use AgungDhewe\Webservice\Configuration;
 
 class LogoutPage extends Page {
@@ -10,6 +11,11 @@ class LogoutPage extends Page {
 		
 		
 		$kalista_sessid = $_SESSION['kalista_sessid'];
+		if ($kalista_sessid==null) {
+			$url = join("/", [Service::getBaseUrl(), "page", "login"]);
+			header("Location: $url");
+			return;
+		}
 		
 
 		// Logout di kalista

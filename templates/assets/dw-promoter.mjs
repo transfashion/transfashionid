@@ -20,9 +20,18 @@ async function promoter_init(opt) {
 	}
 	var obj = elms[0]
 	var elbtn = obj.getElementsByTagName('button')[0];
-	var eltxt = obj.getElementsByTagName('span')[0];
+	var objcontainer = obj.getElementsByTagName('span')[0];
+	var objtext = obj.querySelector('.dw-promoter-text');
 
-	var text = eltxt.innerText;
+	set_promoter_displaymode(objcontainer, objtext);
+	if ("orientation" in screen) {
+		screen.orientation.addEventListener("change", () => {
+			console.log('orientationchange');
+			set_promoter_displaymode(objcontainer, objtext);
+		});
+	} 
+
+	var text = objtext.innerText;
 	if (text.length>0) {
 		obj.classList.remove('hidden');
 		elbtn.onclick = () => {
@@ -37,48 +46,27 @@ async function promoter_init(opt) {
 }
 
 
-async function _promoter_init(opt) {
-	// cek dulu apakah sudah ada elemen buat tampung promoter
-	var elms = document.getElementsByClassName('dw-promoter');
-	if (elms.length!=1) {
-		console.warn(`harus ada 1 elemen dengan class dw-promoters. Dan titemukan ${elms.length} elemen`);
-	}
+function set_promoter_displaymode(objcontainer,objtext) {
+	var containerRect = objcontainer.getBoundingClientRect();
+	var containerWidth = containerRect.right - containerRect.left;
 	
-	if (typeof opt.onLoad !== 'function') {
-		console.warn(`belum ada function onLoad pada option promoter init`);
-		obj.classList.remove('hidden');
-		return;
-	}
+	var textRect = objtext.getBoundingClientRect();
+	var textWidth = textRect.right - textRect.left;
 
-	var obj = elms[0]
-	var elbtn = obj.getElementsByTagName('button')[0];
-	elbtn.onclick = () => {
-		obj.classList.add('hidden');
-		if (typeof opt.onClose === 'function') {
-			opt.onClose ();
-		} else {
-			console.warn(`belum ada function onClose pada option promoter init`);
-		}
-	}
-
-	opt.onLoad((text)=>{
-		promoter_settext(obj, text)
-	})
-}
-
-
-async function promoter_settext(obj, text) {
-	console.log(obj);
-	console.log(text);
-
-	if (text.length>0) {
-		obj.classList.remove('hidden');
-		var eltxt = obj.getElementsByTagName('span')[0];
-		eltxt.innerHTML = `<span>${text}</span>`
+	if (textWidth>containerWidth) {
+		// running text
+		objcontainer.classList.remove('dw-promoter-center')
+		objcontainer.classList.add('dw-promoter-left')
+		objtext.classList.remove('dw-promoter-blinking')
+		objtext.classList.add('dw-promoter-running')
 	} else {
-		// text kosong, sembunyikan promoter
-		obj.classList.add('hidden');
+		// blinking
+		objcontainer.classList.remove('dw-promoter-left')
+		objcontainer.classList.add('dw-promoter-center')
+		objtext.classList.remove('dw-promoter-running')
+		objtext.classList.add('dw-promoter-blinking')
 	}
+
 }
 
 

@@ -55,30 +55,30 @@ final class KalistaApiConnector {
 		// {"code":0,"errormessage":"","response":{"success":true,"errormessage":"","result":{"kalista_sessid":"c0d208f6f9e9901f162e9709fb86884e"}}}
 		if (!$jsonResponse) {
 			$errmsg = Log::error("Cannot connect to $endpoint");
-			throw new \Exception($errmsg, 500);
+			throw new \Exception($errmsg);
 		}
 
 		$data = json_decode($jsonResponse, true);
 		if (json_last_error() !== JSON_ERROR_NONE) {
 			$errmsg = Log::error("JSON error: " . json_last_error_msg());
 			Log::info($jsonResponse);
-			throw new \Exception($errmsg , 500);
+			throw new \Exception($errmsg);
 		}
 
 		if (!array_key_exists('code', $data)) {
 			$errmsg = "bad result from $apipath";
-			throw new \Exception($errmsg , 500);
+			throw new \Exception($errmsg);
 		}
 
 		if ($data['code'] !== 0) {
 			$api_errormessage = array_key_exists('errormessage', $data) ? $data['errormessage'] : "error when execute $apipath";
 			$errmsg = "error from $apipath: " . $api_errormessage ;
-			throw new \Exception($errmsg , 500);
+			throw new \Exception($errmsg);
 		}
 
 		if (!array_key_exists('response', $data)) {
 			$errmsg = "bad result from $apipath";
-			throw new \Exception($errmsg , 500);
+			throw new \Exception($errmsg);
 		}
 	
 		$response = $data['response'];
