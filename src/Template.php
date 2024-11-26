@@ -29,6 +29,7 @@ class Template extends WebTemplate implements ITemplate {
 	public function getPromoterText() : ?string {
 		$text  = 'Dapatkan tambahan discount <b>50%</b> setiap pembelian 2 pairs di <b>GEOX Kota Casablanca</b>,';
 		$text .= ' berlaku <b>hanya hari ini</b> Rabu, 13 November 2024';
+		// $text = "www.transfashion.id";
 		return $text;
 	}
 

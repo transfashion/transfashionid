@@ -1,0 +1,17 @@
+<?php 
+use AgungDhewe\Webservice\Page;
+use AgungDhewe\Webservice\Session;
+
+$page = Page::getWebPageObject($this);
+$tpl = $page->getTemplate();
+$user = Session::GetUser();
+?>
+{block name="title"}Profile - <?=$user->Name?>{/block}
+
+
+<h1>Profile</h1>
+Name: <?=$user->Name?><br>
+Phone: <?=$user->Phone?><br>
+<br>
+
+<a href="page/logout">Logout</a>

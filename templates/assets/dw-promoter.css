@@ -42,6 +42,34 @@
 }
 
 
+
+.dw-promoter-center {
+	text-align: center;
+}
+
+.dw-promoter-left {
+	text-align: left;
+}
+
+.dw-promoter-running {
+	grid-area: text;
+	white-space: nowrap;
+	display: inline-block;
+	overflow: hidden;
+	margin-left: 10px;
+	margin-right: 10px;
+	animation: dw-promoter-berjalan 15s infinite;
+}
+
+.dw-promoter-blinking {
+	grid-area: text;
+	text-align: center;
+	overflow: hidden;
+	animation: dw-promoter-kedip 1s infinite;
+}
+
+
+/* 
 @media screen and (max-width: 1024px) {
 	.dw-promoter span span {
 		grid-area: text;
@@ -65,7 +93,7 @@
 		overflow: hidden;
 		animation: dw-promoter-kedip 1s infinite;
 	}
-}
+} */
 
 .dw-promoter button {
 	grid-area: button;

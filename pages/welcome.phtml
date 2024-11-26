@@ -1,0 +1,13 @@
+<?php 
+use AgungDhewe\Webservice\Page;
+use AgungDhewe\Webservice\Session;
+
+$page = Page::getWebPageObject($this);
+$tpl = $page->getTemplate();
+$user = Session::GetUser();
+?>
+{block name="title"}Welcome, <?=$user->Name?>{/block}
+
+
+Welcome, <?=$user->Name?>
+

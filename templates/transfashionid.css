@@ -6,13 +6,16 @@
 	--width-maximum: 1336px;
 
 	--line-height: 25.6px;
+
+	--font-weight-regular: 300;
+	--font-weight-bold: 500;
 }
 
 
 * {
 	/* font-family: 'futura-regular', sans-serif; */
 	font-family: 'Plus Jakarta Sans', 'sans-serif'; 
-	font-weight: 300;
+	font-weight: var(--font-weight-regular);
 	font-size: 14px;
 	line-height: var(--line-height);  
 	font-style: normal;
@@ -111,6 +114,12 @@ i {
 	font-style: italic;
 }
 
+
+
+
+
+
+
 nav[data-display="desktop"] {
 	grid-area: menubar;
 	min-width: var(--width-minimum);
@@ -140,6 +149,22 @@ main {
 	position: relative;
 	min-width: var(--width-minimum);
 }
+
+main a {
+	color: rgba(0, 0, 0, .5);
+	text-decoration: none;
+	font-weight: var(--font-weight-bold);
+}
+
+main a:hover {
+	color: rgba(0, 0, 0, .3);
+	text-decoration: underline;
+}
+
+main a:visited {
+	color: rgba(0, 0, 0, .5);
+}
+
 
 footer {
 	grid-area: footer;
@@ -287,6 +312,10 @@ button:disabled {
 	box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.4);
 }
 
+
+.default-info-center {
+	text-align: center;
+}
 
 
 /* Desktop */
