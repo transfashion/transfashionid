@@ -2,9 +2,11 @@
 	define('__TEMPLATE_NAME__', 'transfashionid');
 	define('__SEARCH_PLACEHOLDER__', 'Search for product');
 
-
+	use AgungDhewe\Webservice\Session;
 	use Transfashion\Transfashionid\Template;
+	
 	$tpl = Template::getTemplate($this);
+	$user = Session::GetUser();
 ?><!DOCTYPE html>
 <html>
 	<head>
@@ -12,6 +14,7 @@
 		<base href="<?=$tpl->getBaseHref()?>">
 		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="theme-color" content="#000000">
 		<link rel="icon" href="favicon.ico">
 		<link rel="manifest" href="manifest.json">
 		
@@ -95,12 +98,14 @@
 
 			<!-- HEADER RIGHT:BEGIN -->
 			<div class="head-mainrow head-right" style="grid-area: head-right;" data-display="mobile">
-				<button class="dw-iconbutton headLoginRegister" data-icon="account" onclick="window.location='/page/login'"></button>
+				<button class="dw-iconbutton headLoginRegister <?=(!Session::IsLoggedIn()?'hidden':'')?>" data-icon="account" onclick="window.location='/page/profile'"></button>
+				<button class="dw-iconbutton headLoginRegister <?=(Session::IsLoggedIn()?'hidden':'')?>" data-icon="account" onclick="window.location='/page/login'"></button>
 				<button class="dw-iconbutton" data-icon="chart"></button>
 				<button id="btn_search_togle" class="dw-iconbutton" data-icon="search"></button>
 			</div>
 			<div class="head-mainrow head-right" style="grid-area: head-right;" data-display="desktop">
-				<button class="dw-iconbutton headLoginRegister" data-icon="account" onclick="window.location='/page/login'">Login / Register</button>
+				<button class="dw-iconbutton <?=(!Session::IsLoggedIn()?'hidden':'')?>" data-icon="account" onclick="window.location='/page/profile'"><?=$user->Name?></button>
+				<button class="dw-iconbutton headLoginRegister <?=(Session::IsLoggedIn()?'hidden':'')?>" data-icon="account" onclick="window.location='/page/login'">Login / Register</button>
 				<button class="dw-iconbutton" data-icon="chart">Cart</button>
 			</div>
 			<!-- HEADER RIGHT:END -->	

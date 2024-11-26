@@ -15,11 +15,8 @@ final class KalistaApiConnector {
 		$this->_secret = $secret;
 	}
 
-	public final function execute(string $apipath, array $requestParameters, ?array $options = []) : array {
+	public final function execute(string $apipath, array $requestParameters, ?array $options = []) : ?array {
 		$endpoint = join("/", [$this->_url, "api", $apipath]);
-
-
-
 
 		// Data yang akan dikirim
 		$txid = array_key_exists('txtid', $options) ? $options['txid'] : uniqid();
@@ -40,6 +37,7 @@ final class KalistaApiConnector {
 		// siapkan curl
 		$ch = curl_init($endpoint);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Menerima output sebagai string
+		// curl_setopt($ch, CURLOPT_HEADER, true);         // Sertakan header dalam output
 		curl_setopt($ch, CURLOPT_NOBODY, false);        // Tetap sertakan body (ubah ke true jika hanya butuh header)
 		curl_setopt($ch, CURLOPT_POST, true); // Menggunakan metode POST
 		curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -52,13 +50,39 @@ final class KalistaApiConnector {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData); // Data yang dikirim
 
 		// Eksekusi cURL dan ambil responsnya
-		$response = curl_exec($ch);
-		Log::info($response);
+		$jsonResponse = curl_exec($ch);
 
-		return [];
-		// $dataResponse = json_decode($response, true);
+		// {"code":0,"errormessage":"","response":{"success":true,"errormessage":"","result":{"kalista_sessid":"c0d208f6f9e9901f162e9709fb86884e"}}}
+		if (!$jsonResponse) {
+			$errmsg = Log::error("Cannot connect to $endpoint");
+			throw new \Exception($errmsg, 500);
+		}
 
+		$data = json_decode($jsonResponse, true);
+		if (json_last_error() !== JSON_ERROR_NONE) {
+			$errmsg = Log::error("JSON error: " . json_last_error_msg());
+			Log::info($jsonResponse);
+			throw new \Exception($errmsg , 500);
+		}
 
+		if (!array_key_exists('code', $data)) {
+			$errmsg = "bad result from $apipath";
+			throw new \Exception($errmsg , 500);
+		}
+
+		if ($data['code'] !== 0) {
+			$api_errormessage = array_key_exists('errormessage', $data) ? $data['errormessage'] : "error when execute $apipath";
+			$errmsg = "error from $apipath: " . $api_errormessage ;
+			throw new \Exception($errmsg , 500);
+		}
+
+		if (!array_key_exists('response', $data)) {
+			$errmsg = "bad result from $apipath";
+			throw new \Exception($errmsg , 500);
+		}
+	
+		$response = $data['response'];
+		return $response;
 	}
 }
 

@@ -1,14 +1,16 @@
 <?php
 // URL tujuan
-$url = "http://localhost:8007";
+$url = "https://dev.transfashion.id";
 $endpoint = "$url/api/Transfashion/Transfashionid/apis/LoginExternal/RegisterKalistaSession";
 
+
+echo "POST $endpoint\n";
 
 
 // Data yang akan dikirim
 $data = [
 	"request" => [
-		"sessid" => "e8ee907d38db7df0de5a9525c5401229"
+		"sessid" => "5ca374f23c7b18889904dc445e371bbb"
 	]
 ];
 

@@ -9,6 +9,8 @@ use AgungDhewe\Webservice\Routes\PageRoute;
 
 
 use Transfashion\Transfashionid\LoginPage;
+use Transfashion\Transfashionid\LogoutPage;
+use Transfashion\Transfashionid\ProfilePage;
 use Transfashion\Transfashionid\CheckoutPage;
 use Transfashion\Transfashionid\ProductDetilPage;
 use Transfashion\Transfashionid\ProductListPage;
@@ -38,6 +40,8 @@ try {
 	// Prepare debug
 	PageRoute::ResetDebugOnPageRequest(["page/*", "content/*", "api/*"]);
 	PageRoute::addPageHandler('page/login', LoginPage::class);
+	PageRoute::addPageHandler('page/logout', LogoutPage::class);
+	PageRoute::addPageHandler('page/profile', ProfilePage::class);
 	PageRoute::addPageHandler('page/checkout', CheckoutPage::class);
 	PageRoute::addPageHandler('page/product/*', ProductDetilPage::class);
 	PageRoute::addPageHandler('page/list/*', ProductListPage::class);

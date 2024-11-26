@@ -6,49 +6,165 @@ $page = Page::getWebPageObject($this);
 $tpl = $page->getTemplate();
 ?> 
 
+{block name="title"}Login via Whatsapp{/block}
+
 {block name="header-style"}
 <style>
 	article > div {
 		text-align: center;
 	}
 	
-	#pnl_unconfirm {
+	#pnl_errormessage {
 		color: #800000;
+	}
+
+	#txt_whatsapp_message {
+		margin: 20px 20px 20px 20px;
+		padding: 20px;
+		border: 1px solid rgba(0, 0, 0, 0.3);
+		background-color: rgba(0, 0, 0, 0.1);
+		font-size: 0.9em;
+
+	}
+
+	#pnl_login_status {
+		margin-bottom: 50px;
 	}
 
 	.headLoginRegister {
 		display: none !important;
 	}
+
+	.link-with-icon {
+		display: inline-block;
+		background-size: 38px 38px;
+		background-position: -5px -5px;
+		background-repeat: no-repeat;
+		padding-left: 26px;
+		margin-right: 5px;
+	}
+
+	.waiting-timeout {
+		padding: 10px;
+		border: #FFC107 solid 1px;
+		background-color: #FFF9E6;
+	}
 </style>
+
+<style>
+
+	.spinner-container {
+		display: flex;
+		justify-content: center;
+		column-gap: 10px;
+		margin: 30px;
+	}
+
+	.spinner-text {
+		display: inline-block;
+		height: 20px;
+		margin-top: 3px;
+	}
+	
+	.spinner {
+		display: inline-block;
+		width: 20px;
+		height: 20px;
+		border: 4px solid rgba(0, 0, 0, 0.1);
+		border-top-color: rgba(0, 0, 0, 0.8);
+		border-radius: 50%;
+		animation: spin 1s linear infinite;
+	}
+
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+</style>
+
 <link rel="stylesheet" href="<?=$tpl->getTemplateAssetUrl('assets/dw-form.css')?>">
 {/block}
+
+
+{block name="header-script"}
+<script type="text/javascript" src="<?=$tpl->getTemplateAssetUrl('assets/qrious.js')?>"></script>
+{/block}
+
+
+
 
 <article>
 	<div style="font-weight:bold; font-size: 1.3em; margin-bottom: 20px">
 		Login / Register via Whatsapp
 	</div>
-	<div style="margin-bottom: 20px">
-		To proceed with the login process, you will be redirected to the WhatsApp application.<br> 
-		In the app, a message will be automatically filled in,<br>
-		and you only need to send it without any edits.<br> 
-	</div>
-	<div style="margin-bottom: 20px">
-		<label class="dw-input-checkbox">
-			<input id="chk_confirm" type="checkbox" value="<?=Session::Id()?>">
-			<span class="checkmark"></span>
-			I Understand
-		</label>
+
+
+	<div id="pnl_login_confirmation">
+		<?php if (array_key_exists('timeout', $_GET)) { ?>
+		<div class="waiting-timeout" style="margin-bottom: 20px">		
+			Login waiting time has expired. Please try logging in again.
+		</div>
+		<?php } ?>
+
+
+
+
+
+
+		<div style="margin-bottom: 20px">
+			To proceed with the login process, you will be redirected to the WhatsApp application.<br> 
+			In the app, a message will be automatically filled in,<br>
+			and you only need to send it without any edits.<br> 
+		</div>
+		<div style="margin-bottom: 20px">
+			<label class="dw-input-checkbox">
+				<input id="chk_confirm" type="checkbox" value="<?=Session::Id()?>">
+				<span class="checkmark"></span>
+				I Understand
+			</label>
+		</div>
+
+		<div id="pnl_errormessage" class="hidden" style="margin-bottom: 10px">
+			Please confirm that you understand to continue.
+		</div>
+
+		<div style="margin-bottom: 100px">
+			<button id="btn_LoginViaWa" disabled>Continue Login via Whatsapp</button>
+		</div>
+		<div>
+			<a href="page/login">Other Method</a>
+		</div>
 	</div>
 
-	<div id="pnl_unconfirm" class="hidden" style="margin-bottom: 10px">
-		Please confirm that you understand to continue.
-	</div>
+	<div id="pnl_login_status" class="hidden">
+		<div class="spinner-container">
+			<div class="spinner"></div>
+			<div class="spinner-text">Waiting your whatsapp message ....</div>
+		</div>
 
-	<div style="margin-bottom: 100px">
-		<button id="btn_LoginViaWa" disabled>Continue Login via Whatsapp</button>
-	</div>
-	<div>
-		<a href="page/login">Other Method</a>
+		<span data-display="desktop">Please scan the QR code bellow using your smartphone</span>
+		<div data-display="desktop" id="pnl_whatsapp_qrcode" ></div>
+		<div data-display="desktop">
+			Whatsapp will be opened and already contains following text:
+		</div>
+
+		<div data-display="mobile">
+			Open your whatsapp and <b>do not edit</b> the message, 
+			which already contains the following text:
+		</div>
+		
+		<div id="txt_whatsapp_message"></div>
+		
+		<div data-display="desktop">
+			Please <b>do not edit</b>, and just send the message. 
+			You can also klik <a class="lnk_whatsapp link-with-icon logo-whatsapp-color">here</a> to open your whatsapp.
+		</div>
+		<div data-display="mobile">
+			You can also klik <a class="lnk_whatsapp link-with-icon logo-whatsapp-color">here</a> to open your whatsapp.
+		</div>
+		
+		
 	</div>
 
 </article>
