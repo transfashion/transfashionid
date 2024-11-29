@@ -7,6 +7,29 @@ $tpl = $page->getTemplate();
 
 {block name="title"}About Us{/block}
 {block name="header-style"}
+<style>
+    .container{
+        display: flex;
+        justify-content: space-between;
+    }
+
+    h3{
+        line-height: 0.3;
+    }
+
+    @media screen and (min-width: 1025px) {
+        .container{
+            flex-wrap:nowrap;
+        
+        }
+    }
+    @media screen and (max-width: 1024px) {
+        .container{
+            flex-wrap:wrap;
+        
+        }
+    }
+</style>
 <link rel="stylesheet" href="<?=$page->getPageAssetUrl('content.css')?>">
 {/block}
 
@@ -16,10 +39,57 @@ $tpl = $page->getTemplate();
    <p>#LiveYourLifeStyle</p>
    
 </div>
-<p>
-    fahgsfkashfasgadkjhaskjfasjfbaskjbfashcbhb
-    aeyvbcasbcashbcashbcashcbsa
-    kcbaskcbashkcsakhssbckbaskcbsajchvsjhcvuyv
-    fawhvfhvscjvascjhvaschjavscvhcjvcsajhcvajsscascasgag
-</p>
+<div>
+    <h2>It All Started in 2007</h2>
+    <p>Trans Fashion legacy began in 2007 as a leading high-end fashion retailer. The company is now house to 9 international brands such as Aigner, 
+        Bimba Y Lola, Canali, Find Kapoor, Furla, Geox, Moschino, Pinko, and Stella McCartney.</p>
+</div>
+<div>
+    <h2> Our Brands </h2>
+    <p> With nearly 100 branded boutiques in major cities across Indonesia Transfashion is devoted to bring the finest fashion 
+        of the season, Since its creation, Trans Fashion remains strong by continuously acquiring Indonesian affluent consumers.</p>
+</div>
+
+<div class="judul-artikel">
+    <h1> Our Culture </h1>
+</div>
+<div class="container">
+    <div>
+        <h2>Vision<h2>
+        <p>We aspire to be the leader in the premium and luxury fashion business by reshaping retail and 
+        redefining the means of bringing value to our customer.</p>
+    </div>
+    <div>
+        <h2>Mission<h2>
+        <p>We aim to always deliver the latest of fashion trends and innovation to elevate modern 
+        lifestyle by giving the best services, using an integrated ecosystem.</p>
+    </div>
+</div>
+<h1>ACT FAST</h1>
+<div class="container">
+    <div>
+        <h3>Achievement Orientation</h3>
+        <p>Driven to surpass standards</p>
+        <h3>Creative Thinking</h3>
+        <p>Thinking out of the box</p>
+        <h3>Trust</h3>
+        <p>Upholding professionalism</p>
+    </div>
+
+    <div>
+        <h3>Flexibility</h3>
+        <p>Continuously adapting</p>
+        <h3>Analytical Thinking</h3>
+        <p>Comprehensive understanding of problems</p>
+        <h3>Service Orientation</h3>
+        <p>Focus on customer's needs</p>
+    </div>
+
+    <div>
+        <h3>Team Work</h3>
+        <p>Collaborative work uniting everyone</p>
+    </div>
+
+</div>
+
 </article>

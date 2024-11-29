@@ -3,7 +3,7 @@
 
 }
 article{
-    text-align: justify;
+    /* text-align: justify; */
     max-width: 100vw;
     /* overflow-x: scroll; */
 }
