@@ -1,0 +1,120 @@
+<?php 
+// get required page object
+use AgungDhewe\Webservice\Page;
+$page = Page::getWebPageObject($this);
+$tpl = $page->getTemplate();
+?> 
+
+{block name="title"}Contact Us{/block}
+{block name="header-style"}
+<style>
+    .container{
+        display: flex;
+        justify-content: space-around;
+        width: 80%;
+    }
+
+    .box-form{
+        /* border-style:solid; */
+        /* border-color: grey; */
+        /* border-width: 1px; */
+        width:500px;
+        /* background-color: grey; */
+        margin-bottom: 5px;
+        /* margin: 5px; */
+    }
+
+    .box-text{
+        width:400px;
+        text-align:justify;
+        /* background-color: grey; */
+    }
+
+    input,textarea{
+        width:90%;
+        /* margin-left:5px; */
+        margin-bottom:5px;
+    }
+
+    button{
+        /* width:90%; */
+        /* margin-left:5px; */
+        /* background-color: black; */
+    }
+
+    .button1{
+        background-color: black;
+        color: white;
+    }
+
+    .button1:hover{
+        background-color: grey;
+        color: white;
+    }
+
+    .linkwa{
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: -7px -3px;
+        padding-left: 30px;
+
+    }
+
+    @media screen and (min-width: 1025px) {
+        .container{
+            flex-wrap:nowrap;
+            /* width: 90%; */
+            margin-left: 200px;
+        }
+    }
+
+    @media screen and (max-width: 1024px) {     
+        .container{ 
+            flex-wrap:wrap;
+            /* width: 80%;      */
+    }
+        
+    }
+</style>
+
+<link rel="stylesheet" href="<?=$page->getPageAssetUrl('content.css')?>">
+{/block}
+
+<article>
+    <div class="judul-artikel">
+        <h1>Contact Us</h1>
+        <p>#LiveYourLifeStyle</p>
+    </div>
+    <div class="container">
+        <div class="box-text"> 
+        <h2>LET'S GET IN TOUCH</h2>
+        <p>We care about our customers, partners and media. We would love to hear from you! 
+            Fill up the following fields for any brands, business or media-related questions.</p>
+        <h2>WhatsApp</h2>
+        <p><a href="https://api.whatsapp.com/send/?phone=6281119026480&text=Hi%20Transfashion&app_absent=0" target="_blank">
+        <span class="linkwa logo-whatsapp-color">+6281-11902-6480</span></a></p>
+        <h2>Email</h2>
+        <p><a href="mailto:cs@transfashionindonesia.com">cs@transfashionindonesia.com</a></p>
+        <h2>Location</h2>
+        <p>Menara Mega Syariah 18 Floor
+            Jl. H.R. Rasuna Said Kav 19A,
+            Jakarta Selatan, 12950
+            Telp: +62 21 2985 2112
+            Fax: +62 21 2985 2115</p>
+        </div>
+        
+        <div class="box-form">
+            <form>
+                <div><b>Name</b></div>
+                <div><input type="text" placeholder="Your Name"></div>
+                <div><b>Email</b></div>
+                <div><input type="text" placeholder="Your Email"></div>
+                <div><b>Phone Number</b></div>
+                <div><input type="text" placeholder="+62 xxx xxxx xxxx"></div>
+                <div><b>Message</b></div>
+                <div><textarea placeholder="Message" cols="30" rows="10"></textarea></div>
+                <div><button class="button button1" type="submit">Send</button><div>
+            </form>
+        </div>
+    </div>
+</article>
