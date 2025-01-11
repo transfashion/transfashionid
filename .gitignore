@@ -1,17 +1,19 @@
 .DS_Store
 .vscode
 
-/local
+/dockerbuild-*
+/dockerbuild
 /plugins
 /modules
-/vendor
+/vendor/
 /logs
-
+/customs
 
 composer.lock
 
 log.txt
 debug.txt
 config-*.php
+
 
 

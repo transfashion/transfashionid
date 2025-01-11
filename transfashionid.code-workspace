@@ -5,26 +5,45 @@
 		}
 	],
 	"settings": {
-		"intelephense.files.exclude": [
-			"**/.git/**",
-			"**/.svn/**",
-			"**/.hg/**",
-			"**/CVS/**",
-			"**/.DS_Store/**",
-			"**/node_modules/**",
-			"**/bower_components/**",
-			"**/vendor/**/{Tests,tests}/**",
-			"**/.history/**",
-			"**/vendor/**/vendor/**",
-			"**/vendor/transfashion/**",
-			"**/vendor/composer/**"
-		],
+		"intelephense.environment.includePaths": ["vendor"],
+
+
 		"files.exclude": {
-			"**/plugins/*/*/[^src]*": true,
-			"**/plugins/*/*/composer*": true,
-			"**/plugins/*/*/config*": true,
-			"**/plugins/agungdhewe": true,
-			"**/vendor/*/*/[^src]*": true,
+			"**/vendor": true,
+			
+			"docker": true,
+
+			"plugins/agungdhewe/webservice/*.*": true,
+			"plugins/agungdhewe/webservice/modules": true,
+			"plugins/agungdhewe/webservice/mold": true,
+			"plugins/agungdhewe/webservice/plugins": true,
+			"plugins/agungdhewe/webservice/LICENSE": true,
+
+			"debug.txt" : true,
+			"log.txt" : true,
+			"generate.lock" : true,
+
+			// "**/plugins/*/*/[^src]*": true,
+			// "**/plugins/*/*/composer*": true,
+			// "**/plugins/*/*/config*": true,
+			// "**/plugins/agungdhewe": true,
+			// "**/vendor/*/*/[^src]*": true,
 		}
+
+
+		// "intelephense.files.exclude": [
+		// 	"**/.git/**",
+		// 	"**/.svn/**",
+		// 	"**/.hg/**",
+		// 	"**/CVS/**",
+		// 	"**/.DS_Store/**",
+		// 	"**/node_modules/**",
+		// 	"**/bower_components/**",
+		// 	"**/vendor/**/{Tests,tests}/**",
+		// 	"**/.history/**",
+		// 	"**/vendor/**/vendor/**",
+		// 	"**/vendor/transfashion/**",
+		// 	"**/vendor/composer/**"
+		// ],
 	}
 }

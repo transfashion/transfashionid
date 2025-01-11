@@ -2,9 +2,6 @@
     "name": "transfashion/transfashionid",
     "description": "Web TransFashion versi2 (www.transfashion.id)",
     "type": "project",
-    "require": {
-        "agungdhewe/webservice": "@dev"
-    },
     "license": "apache",
     "autoload": {
         "psr-4": {
@@ -25,5 +22,8 @@
                 "symlink": true
             }
         }
-    ]
+    ],
+	"require": {
+        "agungdhewe/webservice": "@dev"
+    }
 }
