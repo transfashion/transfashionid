@@ -1,12 +1,10 @@
 <?php 
-use AgungDhewe\Webservice\Page;
 use AgungDhewe\Webservice\Session;
 
-$page = Page::getWebPageObject($this);
+use Transfashion\Transfashionid\modules\login\LoginPage;
+$page = LoginPage::getObject($this);
 $tpl = $page->getTemplate();
 ?> 
-
-{block name="title"}Login via Whatsapp{/block}
 
 {block name="header-style"}
 <style>
@@ -177,12 +175,12 @@ $tpl = $page->getTemplate();
 		if (window.$module!=null) {
 			await window.$module.Init()
 		} else {
-			console.error("module 'login-via-whatsapp.mjs' not loaded")
+			console.error("module 'LoginViaWhatsapp.mjs' not loaded")
 		}
 	})
 </script>
 <script type="module">
-	import * as uimodule from '<?=$page->getPageAssetUrl('login-via-whatsapp.mjs')?>'
+	import * as uimodule from '<?=$page->getPageAssetUrl('LoginViaWhatsapp.mjs')?>'
 	window.$module = uimodule
 </script>
 {/block}

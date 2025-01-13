@@ -17,6 +17,7 @@
 			"plugins/agungdhewe/webservice/modules": true,
 			"plugins/agungdhewe/webservice/mold": true,
 			"plugins/agungdhewe/webservice/plugins": true,
+			"plugins/agungdhewe/webservice/templates": true,
 			"plugins/agungdhewe/webservice/LICENSE": true,
 
 			"debug.txt" : true,

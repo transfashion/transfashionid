@@ -1,7 +1,7 @@
 <?php 
 // get required page object
-use AgungDhewe\Webservice\Page;
-$page = Page::getWebPageObject($this);
+use Transfashion\Transfashionid\modules\home\HomePage;
+$page = HomePage::getObject($this);
 $tpl = $page->getTemplate();
 ?> 
 {block name="title"}Home{/block}

@@ -19,10 +19,21 @@ class LoginExternal extends WebApi {
 
 		// daftarkan ke kalista
 		$kalistaConfig = Configuration::Get('Kalista');
+		if (!$kalistaConfig) {
+			$errmsg = Log::error("Configuration key 'Kalista' is not found config file");
+			throw new \Exception($errmsg, 500);
+		}
+
 		$url = $kalistaConfig['URL'];
 		$appid = $kalistaConfig['AppId'];
 		$secret = $kalistaConfig['AppSecret'];
 		$apipath = "Transfashion/KalistaApi/Session/RegisterExternalSession";
+
+		if (!$url || !$appid || !$secret) {
+			$errmsg = Log::error("Kalista configuration is not complete");
+			throw new \Exception($errmsg, 500);
+		}
+
 
 
 		// Data yang akan dikirim

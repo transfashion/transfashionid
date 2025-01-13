@@ -2,7 +2,7 @@
 use AgungDhewe\Webservice\Page;
 use AgungDhewe\Webservice\Session;
 
-$page = Page::getWebPageObject($this);
+$page = Page::getObject($this);
 $tpl = $page->getTemplate();
 $user = Session::GetUser();
 ?>

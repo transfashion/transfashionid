@@ -2,11 +2,15 @@
 namespace Transfashion\Transfashionid;
 
 
-use \AgungDhewe\Webservice\Page;
+use \AgungDhewe\Webservice\WebPage;
 
-class ProductListPage extends Page implements IProductListPage {
+class ProductListPage extends WebPage  {
 
-    public function LoadPage(string $requestedPage, array $params): void
+	public static function getObject(object $obj) : ProductListPage {
+		return $obj;
+	}
+
+    public function loadPage(string $requestedPage, array $params): void
     {
         // search criteria
 
@@ -16,10 +20,4 @@ class ProductListPage extends Page implements IProductListPage {
     }
 
 
-	static function getPageObject(object $obj) : IProductListPage { 
-		if (!($obj instanceof ProductListPage)) {
-			throw new \Exception('Handler of this page is not ProductListPage');
-		}
-		return $obj;
-	}
 }

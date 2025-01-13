@@ -3,16 +3,20 @@ namespace Transfashion\Transfashionid;
 
 use AgungDhewe\PhpLogger\Log;
 
-use AgungDhewe\Webservice\Page;
+use AgungDhewe\Webservice\WebPage;
 use AgungDhewe\Webservice\IAuthenticationPage;
 use AgungDhewe\Webservice\Service;
 use AgungDhewe\Webservice\Configuration;
 use AgungDhewe\Webservice\Session;
 use AgungDhewe\Webservice\User;
 
-class LoginPage extends Page implements IAuthenticationPage
-{
-	public function LoadPage(string $requestedContent, array $params): void {
+class LoginPage extends WebPage  implements IAuthenticationPage {
+
+	public static function getObject(object $obj) : LoginPage {
+		return $obj;
+	}
+
+	public function loadPage(string $requestedContent, array $params): void {
 		
 		if (array_key_exists("id", $_GET)) {
 			Log::info('auto login from external');

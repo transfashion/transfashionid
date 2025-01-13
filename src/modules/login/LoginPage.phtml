@@ -1,9 +1,8 @@
 <?php 
-use Transfashion\Transfashionid\LoginPage;
-$page = LoginPage::getPageObject($this);
+use Transfashion\Transfashionid\modules\login\LoginPage;
+$page = LoginPage::getObject($this);
 $tpl = $page->getTemplate();
 ?>
-{block name="title"}Login{/block}
 
 {block name="header-style"}
 <style>
@@ -80,7 +79,7 @@ $tpl = $page->getTemplate();
 	</div>
 
 	<div style="grid-area: walogin; display: flex; justify-content: center;">
-		<button class="waloginbutton" onclick="window.location='/page/login-via-whatsapp'">
+		<button class="waloginbutton" onclick="window.location='/page/login/whatsapp'">
 			Login/Register via Whatsapp<br>
 			(easier, recomended)
 		</button>

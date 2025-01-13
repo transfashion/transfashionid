@@ -1,21 +1,21 @@
 <?php declare(strict_types=1);
 namespace Transfashion\Transfashionid;
 
-use AgungDhewe\Webservice\Page;
+use AgungDhewe\Webservice\WebPage;
 
-class ProfilePage extends Page {
-	public function LoadPage(string $requestedContent, array $params): void {
+class ProfilePage extends WebPage {
+
+	public static function getObject(object $obj) : ProfilePage {
+		return $obj;
+	}
+
+	public function loadPage(string $requestedContent, array $params): void {
 
 
 		
 		parent::LoadPage($requestedContent, $params);
 	}
 
-	static function getPageObject(object $obj) : ProfilePage {
-		if (!($obj instanceof ProfilePage)) {
-			throw new \Exception('Handler of this page is not ProfilePage');
-		}
-		return $obj;
-	}
+
 
 }

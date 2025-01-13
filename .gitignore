@@ -4,7 +4,6 @@
 /dockerbuild-*
 /dockerbuild
 /plugins
-/modules
 /vendor/
 /logs
 /customs

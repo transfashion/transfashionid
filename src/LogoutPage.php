@@ -1,14 +1,18 @@
 <?php declare(strict_types=1);
 namespace Transfashion\Transfashionid;
 
-use AgungDhewe\Webservice\Page;
+use AgungDhewe\Webservice\WebPage;
 use AgungDhewe\Webservice\Session;
 use AgungDhewe\Webservice\Service;
 use AgungDhewe\Webservice\Configuration;
 
-class LogoutPage extends Page {
-	public function LoadPage(string $requestedContent, array $params): void {
-		
+class LogoutPage extends WebPage {
+
+	public static function getObject(object $obj) : LogoutPage {
+		return $obj;
+	}
+
+	public function loadPage(string $requestedContent, array $params): void {
 		
 		$kalista_sessid = $_SESSION['kalista_sessid'];
 		if ($kalista_sessid==null) {

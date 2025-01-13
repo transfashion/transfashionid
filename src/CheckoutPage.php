@@ -2,16 +2,18 @@
 namespace Transfashion\Transfashionid;
 
 
-use \AgungDhewe\Webservice\Page;
+use \AgungDhewe\Webservice\WebPage;
 
-class CheckoutPage extends Page {
+class CheckoutPage extends WebPage {
 
-    public function LoadPage(string $requestedPage, array $params): void
+
+	public static function getObject(object $obj) : CheckoutPage {
+		return $obj;
+	}
+
+    public function loadPage(string $requestedPage, array $params): void
     {
         $this->setData('nama', 'putra');
-
-
-
-        parent::LoadPage($requestedPage, $params);
+        parent::loadPage($requestedPage, $params);
     }
 }

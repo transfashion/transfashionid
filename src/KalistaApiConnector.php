@@ -37,7 +37,7 @@ final class KalistaApiConnector {
 		// siapkan curl
 		$ch = curl_init($endpoint);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); // Menerima output sebagai string
-		// curl_setopt($ch, CURLOPT_HEADER, true);         // Sertakan header dalam output
+		curl_setopt($ch, CURLOPT_HEADER, true);         // Sertakan header dalam output
 		curl_setopt($ch, CURLOPT_NOBODY, false);        // Tetap sertakan body (ubah ke true jika hanya butuh header)
 		curl_setopt($ch, CURLOPT_POST, true); // Menggunakan metode POST
 		curl_setopt($ch, CURLOPT_HTTPHEADER, [
@@ -50,9 +50,39 @@ final class KalistaApiConnector {
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonData); // Data yang dikirim
 
 		// Eksekusi cURL dan ambil responsnya
-		$jsonResponse = curl_exec($ch);
+		$response = curl_exec($ch);
+		$httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-		// {"code":0,"errormessage":"","response":{"success":true,"errormessage":"","result":{"kalista_sessid":"c0d208f6f9e9901f162e9709fb86884e"}}}
+		$header_size = curl_getinfo($ch, CURLINFO_HEADER_SIZE);
+		$httpHeader = substr($response, 0, $header_size);
+		$jsonResponse = substr($response, $header_size);
+
+		if ($httpCode !== 200) {
+			$err = json_decode($jsonResponse, true);
+			if (json_last_error()==JSON_ERROR_NONE) {
+				$api_errormessage = array_key_exists('errormessage', $err) ? $err['errormessage'] : "error when execute $apipath";
+				$errmsg = Log::error($api_errormessage);
+				throw new \Exception($errmsg);
+			} else {
+				Log::error("HTTP error $httpCode when executing '$endpoint'");
+				throw new \Exception($httpHeader);
+			}
+		}
+
+		/*
+		Format result:
+		{
+			"code":0,
+			"errormessage":"",
+			"response":{
+				"success":true,
+				"errormessage":"",
+				"result":{
+					"kalista_sessid":"c0d208f6f9e9901f162e9709fb86884e"
+				}
+			}
+		}
+		*/
 		if (!$jsonResponse) {
 			$errmsg = Log::error("Cannot connect to $endpoint");
 			throw new \Exception($errmsg);

@@ -3,24 +3,22 @@ namespace Transfashion\Transfashionid;
 
 
 
-use \AgungDhewe\Webservice\Page;
+use \AgungDhewe\Webservice\WebPage;
 
 
-class ProductDetilPage extends Page implements IProductDetilPage {
+class ProductDetilPage extends WebPage  {
 
-    public function LoadPage(string $requestedPage, array $params): void
-    {
+	public static function getObject(object $obj) : ProductDetilPage {
+		return $obj;
+	}
+
+    public function loadPage(string $requestedPage, array $params): void {
         // ambil data yang diminta
 
 
 		$requestedPage = "product-detil";
-        parent::LoadPage($requestedPage, $params);
+        parent::loadPage($requestedPage, $params);
     }
 
-	static function getPageObject(object $obj) : IProductDetilPage { 
-		if (!($obj instanceof ProductDetilPage)) {
-			throw new \Exception('Handler of this page is not ProductDetilPage');
-		}
-		return $obj;
-	}
+	
 }

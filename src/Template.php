@@ -2,17 +2,22 @@
 namespace Transfashion\Transfashionid;
 
 use AgungDhewe\Webservice\WebTemplate;
+use AgungDhewe\Webservice\IWebTemplate;
 
 
-class Template extends WebTemplate implements ITemplate {
+class Template extends WebTemplate implements IWebTemplate {
 	const string DEFAULT_NAME = "transfashionid";
-	
-
 	private string $tpldir;
 
-	function __construct(string $tpldir=null) {
+	function __construct(?string $tpldir=null) {
 		$this->tpldir = $tpldir;
 	}
+
+
+	public static function GetObject(object $tpl) : Template {
+		return $tpl;
+	}
+
 
 	public function GetName() : string {
 		return self::DEFAULT_NAME;
@@ -22,9 +27,6 @@ class Template extends WebTemplate implements ITemplate {
 		return $this->tpldir;
 	}
 
-	public static function getTemplate(ITemplate $ifc) : ITemplate {
-		return $ifc;
-	}
 
 	public function getPromoterText() : ?string {
 		$text  = 'Dapatkan tambahan discount <b>50%</b> setiap pembelian 2 pairs di <b>GEOX Kota Casablanca</b>,';

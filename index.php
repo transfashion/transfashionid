@@ -8,7 +8,10 @@ use AgungDhewe\Webservice\Router;
 use AgungDhewe\Webservice\Routes\PageRoute;
 
 
-use Transfashion\Transfashionid\LoginPage;
+use Transfashion\Transfashionid\modules\home\HomePage;
+use Transfashion\Transfashionid\modules\login\LoginPage;
+
+
 use Transfashion\Transfashionid\LogoutPage;
 use Transfashion\Transfashionid\ProfilePage;
 use Transfashion\Transfashionid\CheckoutPage;
@@ -39,22 +42,26 @@ try {
 
 	// Prepare debug
 	PageRoute::ResetDebugOnPageRequest(["page/*", "content/*", "api/*"]);
-	PageRoute::addPageHandler('page/login', LoginPage::class);
-	PageRoute::addPageHandler('page/logout', LogoutPage::class);
-	PageRoute::addPageHandler('page/profile', ProfilePage::class);
-	PageRoute::addPageHandler('page/checkout', CheckoutPage::class);
-	PageRoute::addPageHandler('page/product/*', ProductDetilPage::class);
-	PageRoute::addPageHandler('page/list/*', ProductListPage::class);
+	PageRoute::AddPageHandler('page/home', HomePage::class);
+	PageRoute::AddPageHandler('page/login', LoginPage::class);
+	PageRoute::AddPageHandler('page/login/*', LoginPage::class);
+
+
+	PageRoute::AddPageHandler('page/logout', LogoutPage::class);
+	PageRoute::AddPageHandler('page/profile', ProfilePage::class);
+	PageRoute::AddPageHandler('page/checkout', CheckoutPage::class);
+	PageRoute::AddPageHandler('page/product/*', ProductDetilPage::class);
+	PageRoute::AddPageHandler('page/list/*', ProductListPage::class);
 
 
 	// Route internal
-	Router::setupDefaultRoutes();
+	Router::SetupDefaultRoutes();
 
 	Router::POST('page/login', PageRoute::class);
 	Router::POST('page/checkout', PageRoute::class);
 
 	// Serve url
-	Service::main();
+	Service::Main();
 
 	echo "\n";
 } catch (Exception $ex) {
